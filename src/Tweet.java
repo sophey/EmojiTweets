@@ -1,27 +1,48 @@
+import com.vdurmont.emoji.Emoji;
 
-public class Tweet {
-	
-	private String text;
-	private double latitude;
-	private double longitude;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.HashMap;
 
-	public Tweet(String text, double latitude, double longitude) {
-		this.text = text;
-		this.latitude = latitude;
-		this.longitude = longitude;
-	}
+public class Tweet implements Serializable {
 
-	public String getText() {
-		return text;
-	}
+  private String text;
+  private double latitude;
+  private double longitude;
+  private String state;
 
-	public double getLatitude() {
-		return latitude;
-	}
+  public Tweet(String text, double latitude, double longitude) throws IOException {
+    this.text = text;
+    this.latitude = latitude;
+    this.longitude = longitude;
+    state = new GeoLocator().getStateFromLatLongMapQuest(latitude, longitude);
+    state = "";
+  }
 
-	public double getLongitude() {
-		return longitude;
-	}
-	
-	
+  public String getText() {
+    return text;
+  }
+
+  public double getLatitude() {
+    return latitude;
+  }
+
+  public double getLongitude() {
+    return longitude;
+  }
+
+  @Override
+  public String toString() {
+    return "Tweet{" +
+        "text='" + text + '\'' +
+        ", latitude=" + latitude +
+        ", longitude=" + longitude +
+        ", state='" + state + '\'' +
+        '}';
+  }
+
+  public HashMap<Emoji, Integer> getEmojiFreq() {
+    return ParseEmoji.getEmojiFrequencies(text);
+  }
+
 }

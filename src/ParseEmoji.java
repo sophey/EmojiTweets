@@ -9,6 +9,10 @@ import java.util.Map;
  */
 public class ParseEmoji extends EmojiParser {
 
+  public static boolean containsEmoji(String text) {
+    return !getEmojiFrequencies(text).isEmpty();
+  }
+
   public static HashMap<Emoji, Integer> getEmojiFrequencies(String text) {
     HashMap<Emoji, Integer> map = new HashMap<>();
     for (UnicodeCandidate uc : getUnicodeCandidates(text)) {
