@@ -6,6 +6,8 @@ import java.util.HashMap;
 
 public class Tweet implements Serializable {
 
+  private static final long serialVersionUID = 6337662978794843238L;
+
   private String text;
   private double latitude;
   private double longitude;
@@ -16,7 +18,6 @@ public class Tweet implements Serializable {
     this.latitude = latitude;
     this.longitude = longitude;
     state = new GeoLocator().getStateFromLatLongMapQuest(latitude, longitude);
-    state = "";
   }
 
   public String getText() {
@@ -29,6 +30,10 @@ public class Tweet implements Serializable {
 
   public double getLongitude() {
     return longitude;
+  }
+
+  public String getState() {
+    return state;
   }
 
   @Override

@@ -25,7 +25,7 @@ public class GeoLocator {
       throw new FileNotFoundException("property file '" + propFile + "' not found in classpath");
     }
     google_api = properties.getProperty("google_api_key");
-    mapquest_api = properties.getProperty("mapquest_api_key");
+    mapquest_api = properties.getProperty("mapquest_api_key2");
   }
 
   private String readAll(Reader rd) throws IOException {

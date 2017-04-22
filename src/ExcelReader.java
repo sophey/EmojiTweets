@@ -11,8 +11,8 @@ public class ExcelReader {
   public static final int TWEET_COL = 1;
   public static final int LAT_COL = 2;
   public static final int LONG_COL = 3;
-  public static final String SAVE_FILE = "saved_mapquest";
-  public static final String[] SAVE_FILES = new String[]{"saved_google_1", "saved_mapquest"};
+  public static final String SAVE_FILE = "saved_mapquest2";
+  public static final String[] SAVE_FILES = new String[]{"saved_mapquest", "saved_mapquest2"};
 
   /**
    * Iterate through the spreadsheet and create a new Tweet object for each row.
@@ -25,7 +25,6 @@ public class ExcelReader {
   public static void readTweets() throws IOException {
     List<Tweet> tweets = read(SAVE_FILES);
     System.out.println(tweets.size());
-//    System.out.println(tweets);
   }
 
   public static void saveTweets() throws IOException {
@@ -50,7 +49,7 @@ public class ExcelReader {
     List<Tweet> tweets = new ArrayList<>();
 
     int numGeo = 0;
-    int start = 138473;
+    int start = 204820;
     int row = 0;
     for (Row r : sheet) {
       row++;
@@ -64,7 +63,7 @@ public class ExcelReader {
         if (tweet != null) {
           tweets.add(tweet);
           numGeo++;
-          if (numGeo >= 15000 - 33)
+          if (numGeo >= 15000)
             break;
         }
       }
