@@ -13,7 +13,8 @@ public class Tweet implements Serializable {
   private double longitude;
   private String state;
 
-  public Tweet(String text, double latitude, double longitude) throws IOException {
+  public Tweet(String text, double latitude, double longitude) throws
+      IOException {
     this.text = text;
     this.latitude = latitude;
     this.longitude = longitude;
@@ -46,6 +47,11 @@ public class Tweet implements Serializable {
         '}';
   }
 
+  /**
+   * Get the frequencies of individual emojis in the tweet.
+   *
+   * @return HashMap of emojis to frequencies
+   */
   public HashMap<Emoji, Integer> getEmojiFreq() {
     return ParseEmoji.getEmojiFrequencies(text);
   }
