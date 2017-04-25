@@ -1,3 +1,5 @@
+import com.vdurmont.emoji.Emoji;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -43,10 +45,36 @@ public class TweetProcessor {
     }
   }
 
+  /**
+   * Gets the frequencies of emojis by state.
+   *
+   * @return HashMap of HashMaps (key state, value hashmap of emoji frequencies)
+   */
+  public HashMap<String, HashMap<String, Integer>> stateFrequencies() {
+    HashMap<String, HashMap<String, Integer>> states = new HashMap<>();
+    for (Tweet tweet : tweets) {
+      if (!states.containsKey(tweet.getState()))
+        states.put(tweet.getState(), new HashMap<>());
+
+      HashMap<String, Integer> freq = states.get(tweet.getState());
+      HashMap<Emoji, Integer> tweetFreq = tweet.getEmojiFreq();
+      for (Emoji emoji : tweetFreq.keySet()) {
+        freq.put(emoji.getDescription(), freq.getOrDefault(emoji
+            .getDescription(), 0)
+            + tweetFreq.get(emoji));
+      }
+      states.put(tweet.getState(), freq);
+
+    }
+    return states;
+  }
+
   public static void main(String[] args) throws IOException {
     TweetProcessor tweetProcessor = new TweetProcessor(ExcelReader.read
         (ExcelReader.SAVE_FILES));
-    printHashMap(tweetProcessor.getHashMapStates());
+//    printHashMap(tweetProcessor.getHashMapStates());
+//    ExcelWriter.writeToExcel("tweetOutput.xlsx", tweetProcessor
+//        .stateFrequencies());
   }
 
 }
